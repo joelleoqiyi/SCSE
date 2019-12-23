@@ -428,7 +428,7 @@ section.bl-expand .bl-box {
 .bl-box span{
   transition: 0.1s;
   opacity: 0;
-  font-size: 10px;
+  font-size: 14px;
   left: 10%;
   right: 10%;
   font-weight: bold;
