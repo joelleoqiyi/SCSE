@@ -422,13 +422,13 @@ section.bl-expand .bl-box {
 	-moz-transform: translateY(-15px);
 	-ms-transform: translateY(-15px);
 	transform: translateY(-15px);
-  opacity: 0;
+  	opacity: 0;
 }
 
 .bl-box span{
   transition: 0.1s;
   opacity: 0;
-  font-size: 14px;
+  font-size: 19px;
   left: 10%;
   right: 10%;
   font-weight: bold;
