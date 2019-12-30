@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      html {
+        height: 100%;
+        width: 100%;
+        background: url(canvas.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: 100% 100%; /*to cover the screen with the background picture*/
+      }
+
+      body{
+        height: 100%;
+        width: 100%;
+        position: fixed;
+      }
+      .video {
+        width: 100%;
+        border: 5px solid black;
+      }
+      .wrapper{
+        display:table;
+        width:auto;
+        position: absolute;
+        top: 9%;
+        left: 15%;
+        width:50%;
+      }
+      .playpause {
+          background-image:url(playbutton.png);
+          background-repeat:no-repeat;
+          width:20%;
+          height:20%;
+          position:absolute;
+          left:0%;
+          right:0%;
+          top:25%;
+          bottom:0%;
+          margin:auto;
+          background-size:contain;
+          background-position: center;
+      }
+      p{
+        font-weight: bold;
+        font-size: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <div class="wrapper">
+        <center><p>Introduction Video</p></center>
+        <video class="video" autoplay>
+          <source src="http://e14aaeb709f7cde1ae68-a1d0a134a31b545b257b15f8a8ba5726.r70.cf3.rackcdn.com/projects/31432/1427815464209-bf74131a7528d0ea5ce8c0710f530bb5/1280x720.mp4" type="video/mp4" />
+        </video>
+      <div class="playpause"></div>
+      </div>
+
+  </body>
+
+  <script>
+
+    $( document ).ready(function() {
+        $(".playpause").fadeOut(); <!-- makes the play button fade out when autoplay starts when the website finished loading -->
+    });
+
+
+    $('.video').parent().click(function () {
+      if($(this).children(".video").get(0).paused){
+        $(this).children(".video").get(0).play();
+        $(this).children(".playpause").fadeOut();
+      }else{
+          $(this).children(".video").get(0).pause();
+          $(this).children(".playpause").fadeIn();
+      }
+    });
+    <!-- change source by setting $('.video').src to the source of the video -->
+  </script>
+</html>
