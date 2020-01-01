@@ -49,10 +49,20 @@
         font-weight: bold;
         font-size: 50px;
       }
+
+      img{
+        height: 50%;
+        width: 50%;
+        position: relative;
+        left: 62%; /*adjust manually i guess*/
+        bottom: 7%; /*adjust manually i guess*/
+      }
+
     </style>
   </head>
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <img src="bg_video.png" alt="Double Click for Full Screen. Single Click for Play/Pause">
       <div class="wrapper">
         <center><p>Introduction Video</p></center>
         <video class="video" autoplay>
@@ -64,6 +74,7 @@
   </body>
 
   <script>
+    var elem = document.getElementsByClassName("video")[0];
 
     $( document ).ready(function() {
         $(".playpause").fadeOut(); <!-- makes the play button fade out when autoplay starts when the website finished loading -->
@@ -79,6 +90,19 @@
           $(this).children(".playpause").fadeIn();
       }
     });
+
+    $(".video").dblclick(function(){
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    });
+
     <!-- change source by setting $('.video').src to the source of the video -->
   </script>
 </html>
