@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+      .then(function(stream) {
+        audioContext = new AudioContext();
+        analyser = audioContext.createAnalyser();
+        microphone = audioContext.createMediaStreamSource(stream);
+        javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+        analyser.smoothingTimeConstant = 0.8;
+        analyser.fftSize = 1024;
+
+        microphone.connect(analyser);
+        analyser.connect(javascriptNode);
+        javascriptNode.connect(audioContext.destination);
+        javascriptNode.onaudioprocess = function() {
+            var array = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(array);
+            var values = 0;
+
+            var length = array.length;
+            for (var i = 0; i < length; i++) {
+              values += (array[i]);
+            }
+
+            var average = values / length;
+
+          console.log(Math.round(average));
+          colorPids(average);
+        }
+        })
+        .catch(function(err) {
+          /* handle the error */
+      });
+
+    function colorPids(vol) {
+      let amout_of_pids = Math.round(vol*0.55);
+      $('#microphone').height(amout_of_pids);
+    }
+    </script>
+
+    <style>
+      @keyframes topFadeOut {
+        0% {
+          position: absolute;
+          top: -3rem;
+          opacity: 0;
+        }
+
+        75% {
+          position: absolute;
+          top: 5%;
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInOut{
+        0%{
+          opacity: 0;
+        }
+
+        50%{
+          opacity: 0.5;
+        }
+
+        100%{
+          opacity: 1;
+        }
+      }
+
+      html, body{
+        background: url(http://images.unsplash.com/photo-1536566482680-fca31930a0bd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max);
+      }
+      .pids-wrapper{
+        width: 100%;
+        animation: fadeInOut;
+        animation-duration: 5s;
+      }
+      .pid{
+        width: calc(10% - 10px);
+        height: 10px;
+        display: inline-block;
+        margin: 5px;
+      }
+      #microphone{
+        border-radius: 30%;
+        background-color: black;
+        width: 3%;;
+        min-height: 0.5%;
+        max-height: 9%;
+        position: absolute;
+        bottom: 24.17%;
+        left: 48.5%;
+      }
+
+      .microphone_img{
+        position: absolute;
+        bottom: 15%;
+        left: 45%;
+        height: 20%;
+        width: 10%;
+      }
+
+      .question{
+        font-size: 50px;
+        text-style: italic;
+        font-weight: bold;
+        animation: topFadeOut;
+        animation-duration: 5s;
+        position: absolute;
+        top: 5%;
+        left: 5%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="question">
+      How to respond?
+    </div>
+    <div class="pids-wrapper">
+      <div class="microphone" id="microphone">
+
+      </div>
+      <img src="pictures/microphone+icon-1320183704865921193.png" alt="this function is not working..." class="microphone_img">
+    </div>
+  </body>
+</html>

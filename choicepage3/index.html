@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      @keyframes topFadeOut {
+        0% {
+          position: absolute;
+          top: -3rem;
+          opacity: 0;
+        }
+
+        75% {
+          position: absolute;
+          top: 5%;
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInOut {
+        0% {
+          opacity: 0;
+        }
+
+        45% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+      /*normal css*/
+      html, body {
+
+      background: url(http://images.unsplash.com/photo-1536566482680-fca31930a0bd?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max);
+
+      }
+
+      .wrap {
+      height: 90%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position:  absolute;
+      bottom: 0%;
+      }
+
+      .button {
+      width: 30%;
+      height: 80%;;
+      font-family: 'Roboto', sans-serif;
+      font-size: 50px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: bold;
+      color: #000;
+      background-color: #fff;
+      border: none;
+      border-radius: 45px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      outline: none;
+      animation-name: fadeInOut;
+      animation-duration: 5s;
+      padding: 0px 0px 15% 0px; /* top right bottom left*/
+
+      }
+
+      .button:hover {
+      background-color: #2EE59D;
+      box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+      color: #fff;
+      transform: translateY(-7px);
+      }
+
+      .left{
+        position: absolute;
+        left: 15%;
+        background: url(pictures/left.png) no-repeat center center;
+        background-color: #EEEEEE;
+      }
+
+      .right{
+        position: absolute;
+        right: 15%;
+        background: url(pictures/right.png) no-repeat center center;
+        background-color: #EEEEEE;
+      }
+
+      .question{
+        font-size: 50px;
+        color: white;
+        position: absolute;
+        top: 5%;
+        lefT: 5%;
+        opacity: 1;
+        animation-name: topFadeOut;
+        animation-duration: 5s;
+        text-decoration: none;
+        font-weight: bold;
+        font-style: italic;
+        text-shadow: 4px 5px 4px red;
+
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="question">
+      Transportation?
+    </div>
+    <div class="wrap">
+      <button class="button right">Train</button> <!-- right button (no idea why) -->
+      <button class="button left">bus</button> <!-- left button (no idea why) -->
+    </div>
+  </body>
+</html>
