@@ -5,12 +5,47 @@
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
-      navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+    function createAudioElement(blobUrl) {
+      const downloadEl = document.createElement('a');
+      //downloadEl.style = 'display: block';
+      //downloadEl.innerHTML = 'download';
+      downloadEl.download = 'audio.mp3';
+      downloadEl.href = blobUrl;
+      //const audioEl = document.createElement('audio');
+      //audioEl.controls = true;
+      //const sourceEl = document.createElement('source');
+      //sourceEl.src = blobUrl;
+      //sourceEl.type = 'audio/mp3';
+      //audioEl.appendChild(sourceEl);
+      //document.body.appendChild(audioEl);
+      document.body.appendChild(downloadEl);
+      downloadEl.click();
+    }
+      navigator.mediaDevices.getUserMedia({audio: true})
       .then(function(stream) {
         audioContext = new AudioContext();
+        chunks= [];
         analyser = audioContext.createAnalyser();
         microphone = audioContext.createMediaStreamSource(stream);
         javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+        recorder = new MediaRecorder(stream); //init the recorder
+        recorder.ondataavailable = e => {
+          chunks.push(e.data);
+          if (recorder.state == 'inactive') {
+            const blob = new Blob(chunks, { type: 'audio/mp3' });
+            console.log("Blob initialised");
+            createAudioElement(URL.createObjectURL(blob));
+          }
+        };
+        recorder.start(1000);
+        document.getElementById('recording_on').style.transition = "3s";
+        document.getElementById('recording_on').style.opacity = 1;
+        setTimeout(() => {
+          recorder.stop();
+          document.getElementById('recording_on').style.transition = "2s";
+          document.getElementById('recording_on').style.opacity = 0;
+          // alert("recording stopped"); //recording works.. kinda
+        }, 15000);
 
         analyser.smoothingTimeConstant = 0.8;
         analyser.fftSize = 1024;
@@ -30,8 +65,9 @@
 
             var average = values / length;
 
-          console.log(Math.round(average));
+          //console.log(Math.round(average));
           colorPids(average);
+
         }
         })
         .catch(function(err) {
@@ -120,6 +156,18 @@
         top: 5%;
         left: 5%;
       }
+
+      #recording_on{
+        font-size: 50px;
+        position : absolute;
+        top: 40%;
+        left: 31.5%;
+        font-weight: bold;
+        text-decoration: none;
+        text-style: italic;
+        opacity: 0;
+        z-index: 5;
+      }
     </style>
   </head>
   <body>
@@ -131,6 +179,10 @@
 
       </div>
       <img src="pictures/microphone+icon-1320183704865921193.png" alt="this function is not working..." class="microphone_img">
+    </div>
+
+    <div id="recording_on">
+      Recording your answer...
     </div>
   </body>
 </html>
