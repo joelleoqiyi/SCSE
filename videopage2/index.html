@@ -120,12 +120,13 @@
     </div>
 </body>
   <script>
-    var angle = 0.25; <!-- input from previous page from 0 to 0.5 -->
+    var angle = 0.2; <!-- input from previous page from 0 to 0.5 -->
     var turningangle = "rotate("+angle+"turn)";
+    var percentage = (angle / 0.5)  * 100;
     $( document ).ready(function() {
-      document.getElementById("videos").play();
+      document.getElementById("videos").play(); <!-- plays video -->
       document.getElementsByClassName("gauge-c")[0].style.transform = turningangle;
-
+      document.getElementById("percent").innerHTML = percentage +"%";
     });
   </script>
 </html>
