@@ -2,24 +2,27 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
-    function createAudioElement(blobUrl) {
-      const downloadEl = document.createElement('a');
-      //downloadEl.style = 'display: block';
-      //downloadEl.innerHTML = 'download';
-      downloadEl.download = 'audio.mp3';
-      downloadEl.href = blobUrl;
-      //const audioEl = document.createElement('audio');
-      //audioEl.controls = true;
-      //const sourceEl = document.createElement('source');
-      //sourceEl.src = blobUrl;
-      //sourceEl.type = 'audio/mp3';
-      //audioEl.appendChild(sourceEl);
-      //document.body.appendChild(audioEl);
-      document.body.appendChild(downloadEl);
-      downloadEl.click();
+    var xhr = new XMLHttpRequest();
+    var file = undefined;
+    function downloadfiles(blob) {
+      xhr.open('POST', 'http://pepaudiofiles.s3.amazonaws.com/', true);
+      var formData = new FormData();
+      formData.append('key', "audio.mp3");
+      formData.append('success_action_redirect', "https://www.google.com");
+      formData.append('Content-Type', "audio/mp3");
+      formData.append('x-amz-acl', "public-write");
+      formData.append('X-Amz-Credential', "AKIATNB5XQL4YIXZOLH7/20200111/us-west-2/s3/aws4_request"); //needs to be changed
+      formData.append('X-Amz-Algorithm', "AWS4-HMAC-SHA256");
+      formData.append('X-Amz-Date', "20200111T040912Z"); //needs to be changed
+      formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTE1VDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJwZXBhdWRpb2ZpbGVzIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImF1ZGlvLm1wMyJdLA0KICAgIHsic3VjY2Vzc19hY3Rpb25fcmVkaXJlY3QiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbSJ9LA0KICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICJhdWRpby9tcDMiXSwNCg0KICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBVE5CNVhRTDRZSVhaT0xINy8yMDIwMDExMS91cy13ZXN0LTIvczMvYXdzNF9yZXF1ZXN0In0sDQogICAgeyJ4LWFtei1hY2wiOiAicHVibGljLXdyaXRlIn0sDQogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LA0KICAgIHsieC1hbXotZGF0ZSI6ICIyMDIwMDExMVQwNDA5MTJaIiB9DQogIF0NCn0="); //needs to be changed
+      formData.append('X-Amz-Signature', "b7248aec0c571775feae782f2e98c771b13ffb4f7db879210c761215e7e58dbb");//needs to be changed
+      formData.append('file', blob);
+      xhr.send(formData);
     }
       navigator.mediaDevices.getUserMedia({audio: true})
       .then(function(stream) {
@@ -34,7 +37,7 @@
           if (recorder.state == 'inactive') {
             const blob = new Blob(chunks, { type: 'audio/mp3' });
             console.log("Blob initialised");
-            createAudioElement(URL.createObjectURL(blob));
+            downloadfiles(blob);
           }
         };
         recorder.start(1000);
@@ -178,11 +181,12 @@
       <div class="microphone" id="microphone">
 
       </div>
-      <img src="pictures/microphone+icon-1320183704865921193.png" alt="this function is not working..." class="microphone_img">
+      <img src="pictures/microphone+icon-1320183704865921193.png" alt="Sorry, this function is not working..." class="microphone_img">
     </div>
 
     <div id="recording_on">
       Recording your answer...
     </div>
+
   </body>
 </html>
