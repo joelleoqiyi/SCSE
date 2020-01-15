@@ -16,11 +16,11 @@
       formData.append('success_action_redirect', "https://www.google.com");
       formData.append('Content-Type', "audio/mp3");
       formData.append('x-amz-acl', "public-write");
-      formData.append('X-Amz-Credential', "AKIATNB5XQL4YIXZOLH7/20200111/us-west-2/s3/aws4_request"); //needs to be changed
+      formData.append('X-Amz-Credential', "AKIATNB5XQL4YIXZOLH7/20200115/us-west-2/s3/aws4_request"); //needs to be changed
       formData.append('X-Amz-Algorithm', "AWS4-HMAC-SHA256");
-      formData.append('X-Amz-Date', "20200111T040912Z"); //needs to be changed
-      formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTE1VDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJwZXBhdWRpb2ZpbGVzIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImF1ZGlvLm1wMyJdLA0KICAgIHsic3VjY2Vzc19hY3Rpb25fcmVkaXJlY3QiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbSJ9LA0KICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICJhdWRpby9tcDMiXSwNCg0KICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBVE5CNVhRTDRZSVhaT0xINy8yMDIwMDExMS91cy13ZXN0LTIvczMvYXdzNF9yZXF1ZXN0In0sDQogICAgeyJ4LWFtei1hY2wiOiAicHVibGljLXdyaXRlIn0sDQogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LA0KICAgIHsieC1hbXotZGF0ZSI6ICIyMDIwMDExMVQwNDA5MTJaIiB9DQogIF0NCn0="); //needs to be changed
-      formData.append('X-Amz-Signature', "b7248aec0c571775feae782f2e98c771b13ffb4f7db879210c761215e7e58dbb");//needs to be changed
+      formData.append('X-Amz-Date', "20200115T141126Z"); //needs to be changed
+      formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTIwVDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJwZXBhdWRpb2ZpbGVzIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImF1ZGlvLm1wMyJdLA0KICAgIHsic3VjY2Vzc19hY3Rpb25fcmVkaXJlY3QiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbSJ9LA0KICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICJhdWRpby9tcDMiXSwNCg0KICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBVE5CNVhRTDRZSVhaT0xINy8yMDIwMDExNS91cy13ZXN0LTIvczMvYXdzNF9yZXF1ZXN0In0sDQogICAgeyJ4LWFtei1hY2wiOiAicHVibGljLXdyaXRlIn0sDQogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LA0KICAgIHsieC1hbXotZGF0ZSI6ICIyMDIwMDExNVQxNDExMjZaIiB9DQogIF0NCn0="); //needs to be changed
+      formData.append('X-Amz-Signature', "c42cac98e9ccd010346542d3f6a378207e349436f64f57f4c36cf4a99e5502e6");//needs to be changed
       formData.append('file', blob);
       xhr.send(formData);
     }
