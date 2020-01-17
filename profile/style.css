@@ -1,0 +1,452 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  /*display: flex;
+  justify-content: center;
+  align-items: center;*/
+  font-family: 'Roboto', sans-serif;
+  background: #efefef;
+  overflow: hidden;
+}
+
+.wrapper{
+  padding-left: 50px;
+}
+.panel {
+  position: relative;
+  top: 125px;
+  width: 750px;
+  height: 450px;
+  background: #838CC7;
+  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 60px;
+  background: #fff;
+}
+
+.title {
+  color: #5E6977;
+  font-weight: 500;
+}
+
+.calendar-views span {
+  font-size: 14px;
+  font-weight: 300;
+  color: #BDC6CF;
+  padding: 6px 14px;
+  border: 2px solid transparent;
+}
+.calendar-views span:hover {
+  border: 2px solid #BDC6CF;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.panel-body {
+  display: flex;
+  height: 340px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: 25%;
+  padding: 39px 0px 41px 26px;
+}
+.category {
+  display: flex;
+  flex-direction: column;
+}
+.category span:first-child {
+  font-weight: 300;
+  font-size: 14px;
+  opacity: 0.6;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.category span:last-child {
+  font-size: 32px;
+  font-weight: 300;
+  color: #fff;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  position: relative;
+}
+
+.operating-systems {
+  display: flex;
+  justify-content: space-between;
+  width: 215px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+span[class*="-os"] {
+  font-size: 14px;
+  font-weight: 300;
+  font-size: 14px;
+  color: #c3c6e4;
+}
+span[class*="-os"] span {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 9px;
+}
+.android-os span {
+  background: #80B354;
+}
+.ios-os span {
+  background: #F5A623;
+}
+.windows-os span {
+  background: #F8E71C;
+}
+
+div[class*="-stats"] {
+  position: absolute;
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  opacity: 0;
+  animation: showstats 0.6s linear 1.8s;
+  animation-fill-mode: forwards;
+}
+
+div[class*="-stats"] span {
+  height: 12px;
+  width: 12px;
+  margin: 0 7px;
+  background-color: #fff;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+div[class*="-stats"] span:hover {
+  transform: scale(1.4) rotate(0.02deg);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.android-stats {
+  bottom: 120px;
+  right: 230px;
+}
+.android-stats span:hover {
+  background: #80B354;
+}
+
+.ios-stats {
+  bottom: 83px;
+  left: 133px;
+}
+.ios-stats span:hover {
+  background: #F5A623;
+}
+
+.windows-stats {
+  bottom: 100px;
+  right: 62px;
+}
+.windows-stats span:hover {
+  background: #F8E71C;
+}
+
+.dataset-1 {
+  animation: raise .8s linear 1;
+  transform-origin: bottom;
+}
+.dataset-2 {
+  animation: raise 1.6s linear 1;
+  transform-origin: bottom;
+}
+.dataset-3 {
+  animation: raise 1.8s linear 1;
+  transform-origin: bottom;
+}
+
+.lines {
+  opacity: 0;
+  animation: showlines 0.6s linear 1.6s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showlines {
+  to { opacity: 0.2; }
+}
+
+@keyframes showstats {
+  to { opacity: 1; }
+}
+
+@keyframes raise {
+  0% { transform: scaleY(0.01); }
+  75% { transform: scaleY(1.1); }
+  100% { transform: scaleY(1); }
+}
+
+.topofpage div {
+  height: 100px;
+  width: 400px;
+  border-radius: 10px;
+  border: 5px solid black;
+}
+
+.topofpage > *{
+  position: relative;
+  top: 100px;
+  display: inline-block;
+}
+
+.boxes1{
+  float: left;
+  margin-left: 20px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.box1, .box3, .box5{
+  position: absolute;
+  top: -10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.box2, .box4, .box6{
+  font-size: 30px;
+}
+
+.boxes2{
+  left: 6.7%;
+  right: auto;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.boxes3{
+  float: right;
+  margin-right: 20px;
+  margin-top: 10px;
+  padding: 10px;
+}
+.topofpage{
+  /*padding: 10px;*/
+
+}
+.boxes1 img{
+  position: relative;
+  top: -85px;
+  height: 80px;
+  width: 80px;
+  float: right;
+}
+.headerbar{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #ffe5b4;
+  height: 13%;
+  width: 100%;
+}
+.boxes2 img{
+  position: relative;
+  top: -85px;
+  height: 80px;
+  width: 80px;
+  float: right;
+}
+
+.profilepic{
+  max-height: 100px;
+  max-width: 100px;
+  float: left;
+  padding: 10px;
+}
+
+#accountname:not(#notaccountname){
+  float: left;
+  padding-top: 10px;
+  padding-left: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 25px;
+}
+
+#status{
+  position: absolute;
+  left: 15%;
+  color: white;
+  font-weight: bold;
+}
+.headerbutton img{
+  max-height: 70px;
+  max-width: 70px;
+  float: right;
+  padding-right: 20px;
+  text-decoration: none;
+  padding-top: -100px;
+}
+
+@charset "utf-8";
+/* CSS Document */
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- https://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+*[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+body {
+	background: #f9f9f9;
+	color: #0e171c;
+	font: 300 100%/1.5em 'Lato', sans-serif;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+h2 {
+	font-size: 2em;
+	line-height: 1.25em;
+	margin: .25em 0;
+}
+
+h3 {
+	font-size: 1.5em;
+	line-height: 1em;
+	margin: .33em 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.container {
+	height: 538px;
+	left: 78%;
+	margin: -255px 0 0 -245px;
+	position: absolute;
+	top: 65%;
+	width: 510px;
+}
+
+/* ---------- CALENDAR ---------- */
+
+.calendar {
+	text-align: center;
+}
+
+.calendar header {
+	position: relative;
+  left: -30px;
+}
+
+.calendar h2 {
+	text-transform: uppercase;
+  text-decoration: underline;
+
+}
+
+.calendar thead {
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.calendar tbody {
+	color: #7c8a95;
+}
+
+.calendar tbody td:hover {
+	border: 2px solid #00addf;
+}
+
+.calendar td {
+	border: 2px solid transparent;
+	border-radius: 50%;
+	display: inline-block;
+	height: 4em;
+	line-height: 4em;
+	text-align: center;
+	width: 4em;
+}
+
+.calendar .prev-month,
+.calendar .next-month {
+	color: #cbd1d2;
+}
+
+.calendar .prev-month:hover,
+.calendar .next-month:hover {
+	border: 2px solid #cbd1d2;
+}
+
+.current-day {
+	background: #00addf;
+	color: #f9f9f9;
+}
+
+.event {
+	cursor: pointer;
+	position: relative;
+}
+
+.event:after {
+	background: #00addf;
+	border-radius: 50%;
+	bottom: .5em;
+	display: block;
+	content: '';
+	height: .5em;
+	left: 50%;
+	margin: -.25em 0 0 -.25em;
+	position: absolute;
+	width: .5em;
+}
+
+.event.current-day:after {
+	background: #f9f9f9;
+}
+
+.btn-prev,
+.btn-next {
+	border: 2px solid #cbd1d2;
+	border-radius: 50%;
+	color: #cbd1d2;
+	height: 2em;
+	font-size: .75em;
+	line-height: 2em;
+	margin: -1em;
+	position: absolute;
+	top: 50%;
+	width: 2em;
+}

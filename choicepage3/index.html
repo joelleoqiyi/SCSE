@@ -2,7 +2,69 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript">
+      var xhr = new XMLHttpRequest();
+      var file = undefined;
+      function downloadfiles(blob) {
+        xhr.open('POST', 'http://pepaudiofiles.s3.amazonaws.com/', true);
+        var formData = new FormData();
+        formData.append('key', "id.mp4");
+        formData.append('success_action_redirect', "https://www.google.com");
+        formData.append('Content-Type', "video/mp4");
+        formData.append('x-amz-acl', "public-write");
+        formData.append('X-Amz-Credential', "AKIATNB5XQL4YIXZOLH7/20200115/us-west-2/s3/aws4_request"); //needs to be changed
+        formData.append('X-Amz-Algorithm', "AWS4-HMAC-SHA256");
+        formData.append('X-Amz-Date', "20200115T141126Z"); //needs to be changed
+        formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTIwVDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJwZXBhdWRpb2ZpbGVzIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImlkLm1wNCJdLA0KICAgIHsic3VjY2Vzc19hY3Rpb25fcmVkaXJlY3QiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbSJ9LA0KICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICJ2aWRlby9tcDQiXSwNCg0KICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBVE5CNVhRTDRZSVhaT0xINy8yMDIwMDExNS91cy13ZXN0LTIvczMvYXdzNF9yZXF1ZXN0In0sDQogICAgeyJ4LWFtei1hY2wiOiAicHVibGljLXdyaXRlIn0sDQogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LA0KICAgIHsieC1hbXotZGF0ZSI6ICIyMDIwMDExNVQxNDExMjZaIiB9DQogIF0NCn0="); //needs to be changed
+        formData.append('X-Amz-Signature', "b91d92b3c7236f15dd45191d59e710eb3cc7f65f1ec9eb430bb0b50ed1802fc3");//needs to be changed
+        formData.append('file', blob);
+        xhr.send(formData);
+      }
+        navigator.mediaDevices.getUserMedia({audio: true, video: true})
+        .then(function(stream) {
+          audioContext = new AudioContext();
+          chunks= [];
+          analyser = audioContext.createAnalyser();
+          microphone = audioContext.createMediaStreamSource(stream);
+          javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+          recorder = new MediaRecorder(stream); //init the recorder
+          recorder.ondataavailable = e => {
+            chunks.push(e.data);
+            if (recorder.state == 'inactive') {
+              const blob = new Blob(chunks, { type: 'video/mp4' });
+              console.log("Blob initialised");
+              downloadfiles(blob);
+            }
+          };
+          recorder.start(1000);
+          document.getElementById('recording_on').style.transition = "3s";
+          document.getElementById('recording_on').style.opacity = 1;
+          //console.log('started recording');
+          //alert("recording started");
+          setTimeout(() => {
+            recorder.stop();
+            document.getElementById('recording_on').style.transition = "2s";
+            document.getElementById('recording_on').style.opacity = 0;
+             //alert("recording stopped"); //recording works.. kinda
+            //console.log('stopped recording');
+          }, 4000);
+
+          analyser.smoothingTimeConstant = 0.8;
+          analyser.fftSize = 1024;
+
+          microphone.connect(analyser);
+          analyser.connect(javascriptNode);
+          javascriptNode.connect(audioContext.destination);
+          })
+          .catch(function(err) {
+            /* handle the error */
+        });
+
+      </script>
     <style>
       @keyframes topFadeOut {
         0% {
@@ -111,6 +173,18 @@
 
       }
 
+      #recording_on{
+        font-size: 50px;
+        position : absolute;
+        color: black;
+        top: 40%;
+        left: 31.5%;
+        font-weight: bold;
+        text-decoration: none;
+        text-style: italic;
+        opacity: 0;
+        z-index: 5;
+      }
     </style>
   </head>
   <body>
@@ -121,5 +195,9 @@
       <button class="button right">Train</button> <!-- right button (no idea why) -->
       <button class="button left">bus</button> <!-- left button (no idea why) -->
     </div>
+    <div id="recording_on">
+      Recording your answer...
+    </div>
   </body>
+
 </html>
