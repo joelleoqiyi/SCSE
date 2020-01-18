@@ -7,10 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <meta property="og:title" content="">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="">
-	<meta property="og:site_name" content="">
-	<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<meta property="og:url" content="">
+<meta property="og:site_name" content="">
+<meta property="og:description" content="">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -36,9 +36,9 @@
     padding:3em;
   }*/
 
-  /* ul,li{
+  ul,li{
     list-style:none; //removes the bullet points of the unordered list
-  } */
+  }
   ul li a:not(.navbarr_exclusion){ /*excludes all which have the class navbarr_exclusion*/
     text-decoration:none;
     color:#000;
@@ -59,10 +59,9 @@
     float:left;
   }
   ul li h2{
-    font-size:100%;
+    font-size:200%;
     font-weight:bold;
     padding-bottom:10px;
-    color: black;
   }
   ul li p{
     font-family:"Reenie Beanie",arial,sans-serif;
@@ -157,55 +156,22 @@
   }
 
   ul#menu li:after{
-  	content:"";
-  	width: 100%;
+  content:"";
+  width: 100%;
     height: 20px;
     background: rgba(255,255,255,.5);
-  	position: absolute;
-  	bottom: -20px;
-  	left: 0;
-  	-webkit-mask-image: -webkit-gradient(linear, left 10%, left bottom, from(rgba(0,0,0,.2)), to(rgba(0,0,0,0)));
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  -webkit-mask-image: -webkit-gradient(linear, left 10%, left bottom, from(rgba(0,0,0,.2)), to(rgba(0,0,0,0)));
     z-index: -1;
   }
-
-  #listener, #listener2{
-    background: url(img/be-the-first-bg.jpg) center center;
-
-  }
-
-  #listenerID{
-    position: absolute;
-    left: 28%; /* 42.5% if  seperated*/
-    font-size: 30px;
-    color: white;
-  }
-
-  #relativeposition{
-    position: relative;
-    padding-top: 15%;
-  }
-
-  .pad-lg_bottom{
-    padding-bottom: 160px;
-  }
-
-  .pad-lg_top{
-    padding-top: 160px;
-  }
-
   .blacker{
-    background-color: black;
+    color: black;
+    font-weight: bold;
   }
-
-  .display_center{
-    position: absolute;
-    left: 25%;
-    top: 105%;
-    width: 50%;
-  }
-
-  .text_align_center{
-    text-align: center;
+  .underliner{
+    text-decoration: underline;
   }
   </style>
 
@@ -248,22 +214,19 @@
 
         <div class="row header-info">
           <div class="col-sm-10 col-sm-offset-1 text-center">
-            <h1 class="wow fadeIn">A Wonderful Experience</h1>
+            <h1 class="wow fadeIn blacker" id="PercentageTitle"> </h1>
             <br />
-            <p class="lead wow fadeIn" data-wow-delay="0.5s">In the shoes of those in need...</p>
+            <p class="lead wow fadeIn blacker underliner" data-wow-delay="0.5s" id="choicetitle"></p>
             <br />
 
             <div class="row">
               <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                 <div class="row">
                   <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="0.5s">
-                    <a href="#video" class="btn btn-primary btn-lg scroll button1">Explain</a>
+                    <a href="#video" class="btn btn-secondary btn-lg scroll button1">Explain</a>
                   </div>
                   <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1s">
-                    <a href="#listenertop" class="btn btn-primary btn-lg scroll button1">Ears Up!</a>
-                  </div>
-                  <div class="col-xs-6 text-center wow fadeInUp display_center" data-wow-delay="1.5s" >
-                    <a href="#tips" class="btn btn-secondary btn-lg scroll button1">Links</a>
+                    <a href="#tips" class="btn btn-primary btn-lg scroll button1">Tips</a>
                   </div>
                 </div><!--End Button Row-->
               </div>
@@ -275,20 +238,20 @@
     </header>
 
     <div class="mouse-icon hidden-xs">
-				<div class="scroll"></div>
-			</div>
+<div class="scroll"></div>
+</div>
 
     <section id="video" class="pad-xl">
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
-            <h2>Explanation Videos</h2>
-            <p class="lead">Explanation made easier</p>
+            <h2 class="blacker">Explanation Videos</h2>
+            <p class="lead blacker">Explanation made easier</p>
           </div>
         </div>
 
         <div class="iphone wow fadeInUp" data-wow-delay="0.5s">
-	        <video class="videocontrol" loop autoplay controls poster="img/poster.png">
+       <video class="videocontrol" loop autoplay controls poster="img/poster.png">
               <source src="" type="video/mp4" class="videosource">
                 Your browser does not support viewing of MP4 videos...
           </video>
@@ -324,121 +287,62 @@
     </section>
 
     <!--<section id="main-info" class="pad-xl">
-	    <div class="container">
-		    <div class="row">
-			    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.4s">
-				    <hr class="line purple">
-				    <h3>Integrated</h3>
-				    <p>Our mobile app works together with the website to bring you more functionality with less effort.</p>
-			    </div>
-			    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.8s">
-				    <hr  class="line blue">
-				    <h3>Realistic</h3>
-				    <p>The included VR capabilities of the mobile app allow for a more realistic course environment.</p>
-			    </div>
-			    <div class="col-sm-4 wow fadeIn" data-wow-delay="1.2s">
-				    <hr  class="line yellow">
-				    <h3>Portable</h3>
-				    <p>Access your statistics and areas of improvement straight from your phone.</p>
-			    </div>
-		    </div>
-	    </div>
+   <div class="container">
+   <div class="row">
+   <div class="col-sm-4 wow fadeIn" data-wow-delay="0.4s">
+   <hr class="line purple">
+   <h3>Integrated</h3>
+   <p>Our mobile app works together with the website to bring you more functionality with less effort.</p>
+   </div>
+   <div class="col-sm-4 wow fadeIn" data-wow-delay="0.8s">
+   <hr  class="line blue">
+   <h3>Realistic</h3>
+   <p>The included VR capabilities of the mobile app allow for a more realistic course environment.</p>
+   </div>
+   <div class="col-sm-4 wow fadeIn" data-wow-delay="1.2s">
+   <hr  class="line yellow">
+   <h3>Portable</h3>
+   <p>Access your statistics and areas of improvement straight from your phone.</p>
+   </div>
+   </div>
+   </div>
     </section>-->
 
 
     <!--Pricing-->
-  <section id="listenertop">
-    <br>
-    <br>
-    <br>
-    <br>
-    <!-- hard coding this time lol gg -->
-    <section id="listener" class="pad-bg_top">
-      <div class="container">
-        <div class="row margin-40 margint-20">
-          <div class="col-sm-8 col-sm-offset-2 text-center wow fadeInUp" data-wow-delay="0.5s">
-            <h2 id="listenertitle">Ears Up!</h2>
-            <p class="white">While you were doing your course, EXA was listening to your remarks...</p>
-            <p class="white">EXA picked up the following words: </p>
-          </div>
-        </div>
-        <div class="wow fadeIn" data-wow-delay="1s">
-          <ul id="listenerID">
-            <li>
-              Shit
-            </li>
 
-            <li>
-              What the heck
-            </li>
-
-            <li>
-              What is happening
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </section>
-    <section id="listener2" class="pad-lg_bottom">
-      <div class="container">
-        <div class="row margin-40 margint-20">
-          <div class="col-sm-8 col-sm-offset-2 text-center wow fadeInUp" data-wow-delay="1.5s">
-            <p id="relativeposition" class="white">Well...you only did the course once. Imagine someone with Dyslexia having to go through the same thing every single day. <br> How would they feel? <br> So next time, let's be more understanding to them! </p>
-          </div>
-        </div>
-      </div>
-    </section>
     <section id="tips" class="pad-lg">
       <div class="container">
         <div class="row margin-40 margint-20">
           <div class="col-sm-8 col-sm-offset-2 text-center wow fadeInUp" data-wow-delay="0.5s">
-            <h2 class="white">"Learn MORE" Links!</h2>
-            <p class="white">Consolidated for your knowledge! Try clicking it!</p>
+            <h2 class="blacker">Tips and Tricks</h2>
+            <p class="blacker">Right at your fingertips</p>
           </div>
         </div>
       <div class="wow fadeIn" data-wow-delay="1s"> <!-- added in the fade in -->
           <ul>
           <li>
-            <a href="https://www.das.org.sg/">
-              <h2>Dyslexia Association of Singapore (DAS)</h2>
-              <p>https://www.das.org.sg/</p>
+            <a href="">
+              <h2 style="font-size: 24px; color: black;">Tip #1</h2>
+              <p>Do not respond to other people's judges. Just be yourself.</p>
             </a>
           </li>
           <li>
-            <a href="https://das.org.sg/about-dyslexia/what-is-dyslexia/57-about-dyslexia/89-signs-and-symptoms.html ">
-              <h2>Symptoms & signs</h2>
-              <p>https://das.org.sg/about-dyslexia/what-is-dyslexia/57-about-dyslexia/89-signs-and-symptoms.html </p>
+            <a href="#">
+              <h2 style="font-size: 24px; color: black;">Tip #2</h2>
+              <p>Actively approach for help. You are never alone.</p>
             </a>
           </li>
           <li>
-            <a href="https://en.wikipedia.org/wiki/Dyslexia">
-              <h2>Dyslexia Wikipedia</h2>
-              <p>https://en.wikipedia.org/<br>wiki/Dyslexia</p>
+            <a href="#">
+              <h2 style="font-size: 24px; color: black;">Tip #3</h2>
+              <p>Understand what your purpose is, and look out for things that you need to pay attention to.</p>
             </a>
           </li>
           <li>
-            <a href="https://www.das.org.sg/about-dyslexia/what-is-dyslexia/57-about-dyslexia/90-myths-about-dyslexia.html">
-              <h2>Dyslexia Myths</h2>
-              <p>https://www.das.org.sg/<br>about-dyslexia/what-is-dyslexia/57-about-dyslexia/90-myths-about-dyslexia.html</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.das.org.sg/contact-us.html">
-              <h2>DAS Headquarters</h2>
-              <p>1 Jurong West Central 2 #05-01, Jurong Point Singapore 648886</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.das.org.sg/contact-us.html">
-              <h2>DAS tel contact</h2>
-              <p>+65 6444 5700</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.das.org.sg/contact-us.html">
-              <h2>DAS email contact</h2>
-              <p>info@das.org.sg</p>
+            <a href="#">
+              <h2 style="font-size: 24px; color: black;">Tip #4</h2>
+              <p>Plan before executing. Avoid being lost at the spot.</p>
             </a>
           </li>
         </ul>
@@ -490,7 +394,7 @@
 
           <div class="col-sm-4 text-right">
             <p><small>Copyright &copy; 2019. All rights reserved. <br>
-	            Created by <a href="https://github.com/Iscaraca/SCSETestApp">Waddles</a></small></p>
+           Created by <a href="https://github.com/Iscaraca/SCSETestApp">Waddles</a></small></p>
           </div>
         </div>
 
@@ -517,10 +421,8 @@
       $(this).addClass("highlighted");
       var current_id = $(this).children().attr('id');  <!-- this points to <li tag> , from <li tag> find children aka <a tag> and from <a tag>  find attribute id-->
       $(".videocontrol").get(0).src = current_id;
-      console.log("video is loaded");
       $(".videocontrol").get(0).load(); <!-- $(".videocontrol") gets a jquery object which is like an array, hence to access the element within the array, need to use .get(0) to get the first thing in the jquery object (use [0] also can) since .load() is a function of element and not jquery object-->
       $(".videocontrol").get(0).play();
-
       rotatePrev();
       rotateNext();
       });
@@ -533,6 +435,37 @@
 
       rotatePrev();
       rotateNext();
+
+      var txtFile = new XMLHttpRequest();
+      var number =0;
+      console.log('new txt file generated');
+      txtFile.open("GET", "https://pepaudiofiles.s3-us-west-2.amazonaws.com/results.txt", true);
+      txtFile.onreadystatechange = function() {
+          if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+            if (txtFile.status === 200) {  // Makes sure it's found the file.
+              allText = txtFile.responseText;
+              console.log(allText);
+                //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
+              textlength = allText.length;
+              for(var i=0; i<textlength;i++){
+                if(allText[i] == "1"){
+                  number = number+1;
+                }
+              }
+              number2 = (number/textlength)*100;
+              roundednumber = Math.round(number2);
+              console.log(roundednumber);
+              document.getElementById('PercentageTitle').innerHTML = roundednumber+"%";
+              if(allText[textlength-1] == "1"){
+                document.getElementById('choicetitle').innerHTML = "You bought: Red Velvet Oreos & Chips!"
+              } else {
+                document.getElementById('choicetitle').innerHTML = "You bought: Red Velvet Oreos & Green Tea!"
+              }
+            }
+          }
+        }
+        txtFile.send(null);
+       document.getElementById('PercentageTitle').innerHTML = "50" ;
 
       function rotatePrev(){
       var translate = offset;

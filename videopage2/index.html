@@ -2,7 +2,7 @@
 <html>
 <head>
   <title></title>
-  <link rel="stylesheet" type="text/css" href="css.css">
+  <!--<link rel="stylesheet" type="text/css" href="css.css">-->
   <script type="text/javascript" src="jquery-min.js"></script>
   <script type="text/javascript" src="jquery.transit.min.js"></script>
   <script type="text/javascript" src="js.js"></script>
@@ -108,7 +108,7 @@
 
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <video id="videos">
+  <video id="videos" controls autoplay>
     <source src="http://e14aaeb709f7cde1ae68-a1d0a134a31b545b257b15f8a8ba5726.r70.cf3.rackcdn.com/projects/31432/1427815464209-bf74131a7528d0ea5ce8c0710f530bb5/1280x720.mp4" type="video/mp4" />
   </video>
   <div class="container">
@@ -120,13 +120,49 @@
     </div>
 </body>
   <script>
-    var angle = 0.2; <!-- input from previous page from 0 to 0.5 -->
-    var turningangle = "rotate("+angle+"turn)";
-    var percentage = (angle / 0.5)  * 100;
+    var angle = 0; <!-- input from previous page from 0 to 0.5 -->
+    var turningangle ="";
+    var percentage =0;
+    var roundednumber =0;
     $( document ).ready(function() {
-      document.getElementById("videos").play(); <!-- plays video -->
-      document.getElementsByClassName("gauge-c")[0].style.transform = turningangle;
-      document.getElementById("percent").innerHTML = percentage +"%";
+      var txtFile = new XMLHttpRequest();
+      var number =0;
+      console.log('new txt file generated');
+      txtFile.open("GET", "https://pepaudiofiles.s3-us-west-2.amazonaws.com/results.txt", true);
+      console.log('txt file opened');
+      txtFile.onreadystatechange = function() {
+          console.log('on ready state change');
+          if (txtFile.readyState === 4) {
+            console.log("document ready to parse");// Makes sure the document is ready to parse.
+            if (txtFile.status === 200) {  // Makes sure it's found the file.
+              allText = txtFile.responseText;
+              console.log(allText);
+                //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
+              textlength = allText.length;
+              for(var i=0; i<textlength;i++){
+                if(allText[i] == "1"){
+                  number = number+1;
+                }
+              }
+              number2 = (number/textlength)*100;
+              roundednumber = Math.round(number2);
+              console.log(roundednumber);
+              angle = (roundednumber/100)*0.5;
+              turningangle = "rotate("+angle+"turn)";
+              document.getElementById("videos").play();
+              document.getElementsByClassName("gauge-c")[0].style.transform = turningangle;
+              document.getElementById("percent").innerHTML = roundednumber + "%";
+            }
+          } else{
+            console.log('document is not ready to parse');
+          }
+        }
+      txtFile.send(null);
+      //document.getElementById("videos").play();
+      //document.getElementsByClassName("gauge-c")[0].style.transform = turningangle;
+      //document.getElementById("videos").play(); <!-- plays video -->
+      //document.getElementById("percent").innerHTML = roundednumber +"%";
+      //document.getElementByClassName("gauge-c")[0].style.transform = "rotate(0.2)";
     });
   </script>
 </html>
