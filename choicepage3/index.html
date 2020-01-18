@@ -6,8 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <script type="text/javascript">
-      var xhr = new XMLHttpRequest();
+      /*var xhr = new XMLHttpRequest();
       var file = undefined;
       function downloadfiles(blob) {
         xhr.open('POST', 'http://pepaudiofiles.s3.amazonaws.com/', true);
@@ -23,7 +24,68 @@
         formData.append('X-Amz-Signature', "b91d92b3c7236f15dd45191d59e710eb3cc7f65f1ec9eb430bb0b50ed1802fc3");//needs to be changed
         formData.append('file', blob);
         xhr.send(formData);
+      }*/
+
+      window.addEventListener("load", function(){
+      // [1] GET ALL THE HTML ELEMENTS
+      var video = document.getElementById("vid-show"),
+          canvas = document.getElementById("vid-canvas"),
+          take = document.getElementById("vid-take");
+
+      // [2] ASK FOR USER PERMISSION TO ACCESS CAMERA
+      // WILL FAIL IF NO CAMERA IS ATTACHED TO COMPUTER
+      navigator.mediaDevices.getUserMedia({ video : true })
+      .then(function(stream) {
+        // [3] SHOW VIDEO STREAM ON VIDEO TAG
+        video.srcObject = stream;
+        video.play();
+        console.log("video playing");
+
+        // [4] WHEN WE CLICK ON "TAKE PHOTO" BUTTON
+        take.addEventListener("click", function(){
+          console.log('button clicked');
+          // Create snapshot from video
+          var draw = document.createElement("canvas");
+          draw.width = video.videoWidth;
+          draw.height = video.videoHeight;
+          var context2D = draw.getContext("2d");
+          context2D.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+          console.log("photo generated");
+          // Upload to server
+          draw.toBlob(function(blob){
+            //var data = new FormData();
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://pepaudiofiles.s3.amazonaws.com/', true);
+            var formData = new FormData();
+            formData.append('key', "id.jpg");
+            formData.append('success_action_redirect', "https://www.google.com");
+            formData.append('Content-Type', "image/jpg");
+            formData.append('x-amz-acl', "public-write");
+            formData.append('X-Amz-Credential', "AKIATNB5XQL4YIXZOLH7/20200115/us-west-2/s3/aws4_request"); //needs to be changed
+            formData.append('X-Amz-Algorithm', "AWS4-HMAC-SHA256");
+            formData.append('X-Amz-Date', "20200115T141126Z"); //needs to be changed
+            formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTIwVDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJwZXBhdWRpb2ZpbGVzIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImlkLmpwZyJdLA0KICAgIHsic3VjY2Vzc19hY3Rpb25fcmVkaXJlY3QiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbSJ9LA0KICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICJpbWFnZS9qcGciXSwNCg0KICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBVE5CNVhRTDRZSVhaT0xINy8yMDIwMDExNS91cy13ZXN0LTIvczMvYXdzNF9yZXF1ZXN0In0sDQogICAgeyJ4LWFtei1hY2wiOiAicHVibGljLXdyaXRlIn0sDQogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LA0KICAgIHsieC1hbXotZGF0ZSI6ICIyMDIwMDExNVQxNDExMjZaIiB9DQogIF0NCn0="); //needs to be changed
+            formData.append('X-Amz-Signature', "ec6e183ddd3943b1c08627c4a878dbe65bfcb372448176479cade1331176ccd7");//needs to be changed
+            formData.append('file', blob);
+            xhr.send(formData);
+          });
+        });
+      })
+      .catch(function(err) {
+        document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
+      });
+    });
+      /*function takeASnap(){
+        const canvas = document.createElement('canvas'); // create a canvas
+        const ctx = canvas.getContext('2d'); // get its context
+        canvas.width = vid.videoWidth; // set its size to the one of the video
+        canvas.height = vid.videoHeight;
+        ctx.drawImage(vid, 0,0); // the video
+        return new Promise((res, rej)=>{
+          canvas.toBlob(res, 'image/jpeg'); // request a Blob from the canvas
+        });
       }
+        const vid = document.querySelector('video');
         navigator.mediaDevices.getUserMedia({audio: true, video: true})
         .then(function(stream) {
           audioContext = new AudioContext();
@@ -39,6 +101,8 @@
               console.log("Blob initialised");
               downloadfiles(blob);
             }
+            takeASnap()
+            .then(downloadfiles);
           };
           recorder.start(1000);
           document.getElementById('recording_on').style.transition = "3s";
@@ -61,8 +125,7 @@
           javascriptNode.connect(audioContext.destination);
           })
           .catch(function(err) {
-            /* handle the error */
-        });
+        });*/
 
       </script>
     <style>
@@ -112,6 +175,7 @@
       justify-content: space-between;
       position:  absolute;
       bottom: 0%;
+      z-index: -1;
       }
 
       .button {
@@ -185,6 +249,10 @@
         opacity: 0;
         z-index: 5;
       }
+      #vid-show, #vid-canvas, #vid-take {
+              display: block;
+              margin-bottom: 20px;
+      }
     </style>
   </head>
   <body>
@@ -192,12 +260,18 @@
       Transportation?
     </div>
     <div class="wrap">
-      <button class="button right">Train</button> <!-- right button (no idea why) -->
-      <button class="button left">bus</button> <!-- left button (no idea why) -->
+      <button class="button right" id="r">Train</button> <!-- right button (no idea why) -->
+      <button class="button left" id="l">bus</button> <!-- left button (no idea why) -->
     </div>
     <div id="recording_on">
       Recording your answer...
     </div>
+    <div id="vid-controls">
+      <video id="vid-show" autoplay></video>
+      <input id="vid-take" type="button" value="Take Photo"/>
+      <div id="vid-canvas"></div>
+    </div>
+
   </body>
 
 </html>

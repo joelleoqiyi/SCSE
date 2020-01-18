@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <title>Progress.com</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <meta property="og:title" content="">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:site_name" content="">
+	<meta property="og:description" content="">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link  href="http://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script src="js/modernizr-2.7.1.js"></script>
+  <style type="text/css">
+  *{
+    margin:0;
+    padding:0;
+  }
+/*  h2,p{
+    font-size:100%;
+    font-weight:normal;
+  }
+  ul{
+    overflow:hidden;
+    padding:3em;
+  }*/
+
+  /* ul,li{
+    list-style:none; //removes the bullet points of the unordered list
+  } */
+  ul li a:not(.navbarr_exclusion){ /*excludes all which have the class navbarr_exclusion*/
+    text-decoration:none;
+    color:#000;
+    background:#ffc;
+    display:inline-grid;
+    height:15em; /*set the height and width of the notes*/
+    width:15em;
+    padding:1em;
+    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    -moz-transition:-moz-transform .15s linear;
+    -o-transition:-o-transform .15s linear;
+    -webkit-transition:-webkit-transform .15s linear;
+  }
+  ul li{ /*set all the margins of the li into 1em then make all of them shift to the left most to allow them to occupy as little rows as possible*/
+    margin:1em;
+    float:left;
+  }
+  ul li h2{
+    font-size:100%;
+    font-weight:bold;
+    padding-bottom:10px;
+    color: black;
+  }
+  ul li p{
+    font-family:"Reenie Beanie",arial,sans-serif;
+    font-size:180%;
+  }
+  ul li a:not(.exclude){/*can be added on top if want*/
+    -webkit-transform: rotate(-6deg);
+    -o-transform: rotate(-6deg);
+    -moz-transform:rotate(-6deg);
+  }
+  ul li:nth-child(even) a{ /* controls the design of certain notes */
+    -o-transform:rotate(4deg);
+    -webkit-transform:rotate(4deg);
+    -moz-transform:rotate(4deg);
+    position:relative;
+    top:5px;
+    background:#cfc;
+  }
+  ul li:nth-child(3n) a{ /* controls the design of certain notes */
+    -o-transform:rotate(-3deg);
+    -webkit-transform:rotate(-3deg);
+    -moz-transform:rotate(-3deg);
+    position:relative;
+    top:-5px;
+    background:#ccf;
+  }
+  ul li:nth-child(5n) a{ /* controls the design of certain notes*/
+    -o-transform:rotate(5deg);
+    -webkit-transform:rotate(5deg);
+    -moz-transform:rotate(5deg);
+    position:relative;
+    top:-10px;
+  }
+  ul li a:hover,ul li a:focus{ /* control the movement of the notes*/
+    box-shadow:10px 10px 7px rgba(0,0,0,.7);
+    -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+    -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    -o-transform: scale(1.25);
+    position:relative;
+    z-index:5;
+  }
+
+  .navbarrr{ /*to color the course button in the collapse navbar*/
+    background-color: #FF0000;
+  }
+/*carousell for videos*/
+  #menu{
+    padding-left: 80px;
+    width: 100%;
+    perspective: 1000px;
+    display: inline-block;
+    margin: 50px auto;
+    text-align: center;
+    transition: .3s transform ease;
+    position: relative;
+    left: 12%;
+    right: 10%
+  }
+
+
+  #menu li{
+    display: inline-block;
+    position: relative;
+    list-style-type: none;
+    transition: .3s transform ease;
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
+  }
+
+  #menu li.highlighted{
+    transform: rotate(0) translateX(0)!important;
+    z-index: 99!important;
+    box-shadow: 0 0 80px rgba(0,0,0,.8);
+  }
+
+  #menu li.highlighted p{
+    transform: scale(1.3);
+  }
+
+  #menu li p{
+    position: relative;
+    display: block;
+    height: 100px;
+    width: 100px;
+    background: transparent url(img/carousel.jpg) no-repeat center;
+    background-size: cover;
+    background-color: transparent;
+    color: black;
+    font-size: 50px;
+    border-top: solid 1px rgba(255,255,255,.2);
+  }
+
+  ul#menu li:after{
+  	content:"";
+  	width: 100%;
+    height: 20px;
+    background: rgba(255,255,255,.5);
+  	position: absolute;
+  	bottom: -20px;
+  	left: 0;
+  	-webkit-mask-image: -webkit-gradient(linear, left 10%, left bottom, from(rgba(0,0,0,.2)), to(rgba(0,0,0,0)));
+    z-index: -1;
+  }
+
+  #listener, #listener2{
+    background: url(img/be-the-first-bg.jpg) center center;
+
+  }
+
+  #listenerID{
+    position: absolute;
+    left: 28%; /* 42.5% if  seperated*/
+    font-size: 30px;
+    color: white;
+  }
+
+  #relativeposition{
+    position: relative;
+    padding-top: 15%;
+  }
+
+  .pad-lg_bottom{
+    padding-bottom: 160px;
+  }
+
+  .pad-lg_top{
+    padding-top: 160px;
+  }
+
+  .blacker{
+    background-color: black;
+  }
+
+  .display_center{
+    position: absolute;
+    left: 25%;
+    top: 105%;
+    width: 50%;
+  }
+
+  .text_align_center{
+    text-align: center;
+  }
+  </style>
+
+</head>
+
+<body>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="logo" href="index.html"><img src="img/logo.png" alt="Logo"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#tips" class="scroll navbarr_exclusion navbarrr">Courses</a></li> <!-- PART A -->
+            <li><a href="#" class="navbarr_exclusion">Profile</a></li> <!-- PART B -->
+          </ul>
+          <p>&#10;</p>
+          <p>&#10;</p>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6">
+            <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
+          </div>
+          <div class="col-xs-6 signin text-right navbar-nav">
+            <a href="#" class="scroll navbarr_exclusion">Courses</a>&nbsp; &nbsp;<a href="#" class="navbarr_exclusion">Profile</a>
+          </div>
+        </div>
+
+        <div class="row header-info">
+          <div class="col-sm-10 col-sm-offset-1 text-center">
+            <h1 class="wow fadeIn">A Remarkable Progress</h1>
+            <br />
+            <p class="lead wow fadeIn" data-wow-delay="0.5s">In an familiar environment.</p>
+            <br />
+
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                <div class="row">
+                  <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="0.5s">
+                    <a href="#video" class="btn btn-primary btn-lg scroll button1">Explain</a>
+                  </div>
+                  <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1s">
+                    <a href="#listenertop" class="btn btn-primary btn-lg scroll button1">Ears Up!</a>
+                  </div>
+                  <div class="col-xs-6 text-center wow fadeInUp display_center" data-wow-delay="1.5s" >
+                    <a href="#tips" class="btn btn-secondary btn-lg scroll button1">Links</a>
+                  </div>
+                </div><!--End Button Row-->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="mouse-icon hidden-xs">
+				<div class="scroll"></div>
+			</div>
+
+    <section id="video" class="pad-xl">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text-center margin-30 wow fadeIn" data-wow-delay="0.6s">
+            <h2>Explanation Videos</h2>
+            <p class="lead">Explanation made easier</p>
+          </div>
+        </div>
+
+        <div class="iphone wow fadeInUp" data-wow-delay="0.5s">
+	        <video class="videocontrol" loop autoplay controls poster="img/poster.png">
+              <source src="" type="video/mp4" class="videosource">
+                Your browser does not support viewing of MP4 videos...
+          </video>
+        </div>
+        <section class="bg wow fadeInUp" data-wow-delay="1s">
+          <ul id="menu">
+            <li>
+              <p class="exclude" id="https://pepaudiofiles.s3-us-west-2.amazonaws.com/videos/%23Ass_DEP_5+and+7.mp4"><br><br>1</p>
+            </li>
+            <li>
+              <p class="exclude" id="testvideo2"><br><br>2</p>
+            </li>
+            <li>
+              <p class="exclude" id="testvideo3"><br><br>3</p>
+            </li>
+            <li class="highlighted">
+              <p class="exclude" id="testvideo4"><br><br>4</p>
+            </li>
+            <li>
+              <p class="exclude" id="testvideo5"><br><br>5</p>
+            </li>
+            <li>
+              <p class="exclude" id="testvideo6"><br><br>6</p>
+            </li>
+            <li>
+              <p class="exclude" id="testvideo7"><br><br>7</p>
+            </li>
+          </ul>
+
+        </section>
+
+      </div>
+    </section>
+
+    <!--<section id="main-info" class="pad-xl">
+	    <div class="container">
+		    <div class="row">
+			    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.4s">
+				    <hr class="line purple">
+				    <h3>Integrated</h3>
+				    <p>Our mobile app works together with the website to bring you more functionality with less effort.</p>
+			    </div>
+			    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.8s">
+				    <hr  class="line blue">
+				    <h3>Realistic</h3>
+				    <p>The included VR capabilities of the mobile app allow for a more realistic course environment.</p>
+			    </div>
+			    <div class="col-sm-4 wow fadeIn" data-wow-delay="1.2s">
+				    <hr  class="line yellow">
+				    <h3>Portable</h3>
+				    <p>Access your statistics and areas of improvement straight from your phone.</p>
+			    </div>
+		    </div>
+	    </div>
+    </section>-->
+
+
+    <!--Pricing-->
+  <section id="listenertop">
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- hard coding this time lol gg -->
+    <section id="listener" class="pad-bg_top">
+      <div class="container">
+        <div class="row margin-40 margint-20">
+          <div class="col-sm-8 col-sm-offset-2 text-center wow fadeInUp" data-wow-delay="0.5s">
+            <h2 id="listenertitle">Ears Up!</h2>
+            <p class="white">While you were doing your course, EXA was listening to your remarks...</p>
+            <p class="white">EXA picked up the following words: </p>
+          </div>
+        </div>
+        <div class="wow fadeIn" data-wow-delay="1s">
+          <ul id="listenerID">
+            <li>
+              Shit
+            </li>
+
+            <li>
+              What the heck
+            </li>
+
+            <li>
+              What is happening
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </section>
+    <section id="listener2" class="pad-lg_bottom">
+      <div class="container">
+        <div class="row margin-40 margint-20">
+          <div class="col-sm-8 col-sm-offset-2 text-center wow fadeInUp" data-wow-delay="1.5s">
+            <p id="relativeposition" class="white">Well...you only did the course once. Imagine someone with Dyslexia having to go through the same thing every single day. <br> How would they feel? <br> So next time, let's be more understanding to them! </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="tips" class="pad-lg">
+      <div class="container">
+        <div class="row margin-40 margint-20">
+          <div class="col-sm-8 col-sm-offset-2 text-center wow fadeInUp" data-wow-delay="0.5s">
+            <h2 class="white">"Learn MORE" Links!</h2>
+            <p class="white">Consolidated for your knowledge! Try clicking it!</p>
+          </div>
+        </div>
+      <div class="wow fadeIn" data-wow-delay="1s"> <!-- added in the fade in -->
+          <ul>
+          <li>
+            <a href="https://www.das.org.sg/">
+              <h2>Dyslexia Association of Singapore (DAS)</h2>
+              <p>https://www.das.org.sg/</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://das.org.sg/about-dyslexia/what-is-dyslexia/57-about-dyslexia/89-signs-and-symptoms.html ">
+              <h2>Symptoms & signs</h2>
+              <p>https://das.org.sg/about-dyslexia/what-is-dyslexia/57-about-dyslexia/89-signs-and-symptoms.html </p>
+            </a>
+          </li>
+          <li>
+            <a href="https://en.wikipedia.org/wiki/Dyslexia">
+              <h2>Dyslexia Wikipedia</h2>
+              <p>https://en.wikipedia.org/<br>wiki/Dyslexia</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.das.org.sg/about-dyslexia/what-is-dyslexia/57-about-dyslexia/90-myths-about-dyslexia.html">
+              <h2>Dyslexia Myths</h2>
+              <p>https://www.das.org.sg/<br>about-dyslexia/what-is-dyslexia/57-about-dyslexia/90-myths-about-dyslexia.html</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.das.org.sg/contact-us.html">
+              <h2>DAS Headquarters</h2>
+              <p>1 Jurong West Central 2 #05-01, Jurong Point Singapore 648886</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.das.org.sg/contact-us.html">
+              <h2>DAS tel contact</h2>
+              <p>+65 6444 5700</p>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.das.org.sg/contact-us.html">
+              <h2>DAS email contact</h2>
+              <p>info@das.org.sg</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </section>
+
+
+    <!-- <section id="invite" class="pad-lg light-gray-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text-center">
+            <i class="fa fa-envelope-o margin-40"></i>
+            <h2 class="black">Get in touch</h2>
+            <br />
+            <p class="black">Send us your queries or ways in which we can improve to help you.</p>
+            <br />
+
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <form role="form">
+                  <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Here">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg">TELL US</button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section> //used for contact;removed since no need-->
+
+
+<!-- default; anything below this dont touch -->
+    <footer>
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm-8 margin-20">
+            <ul class="list-inline social">
+              <li>Connect with us on</li>
+              <li><a href="#" class="navbarr_exclusion"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="#" class="navbarr_exclusion"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="navbarr_exclusion"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+          </div>
+
+          <div class="col-sm-4 text-right">
+            <p><small>Copyright &copy; 2019. All rights reserved. <br>
+	            Created by <a href="https://github.com/Iscaraca/SCSETestApp">Waddles</a></small></p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+
+    <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  <script>
+    <!-- for explanation videos -->
+    var offset = 60,
+    zInd = 1;
+
+
+      $("ul#menu li").mouseover(function(){ <!-- whenever mouseover over an element, it will remove highlighted  from the previous one and add it into the one that is currently moused_over -->
+      $("#menu li").removeClass("highlighted");
+      $(this).addClass("highlighted");
+      var current_id = $(this).children().attr('id');  <!-- this points to <li tag> , from <li tag> find children aka <a tag> and from <a tag>  find attribute id-->
+      $(".videocontrol").get(0).src = current_id;
+      console.log("video is loaded");
+      $(".videocontrol").get(0).load(); <!-- $(".videocontrol") gets a jquery object which is like an array, hence to access the element within the array, need to use .get(0) to get the first thing in the jquery object (use [0] also can) since .load() is a function of element and not jquery object-->
+      $(".videocontrol").get(0).play();
+
+      rotatePrev();
+      rotateNext();
+      });
+
+      $("ul#menu li:first-child").mouseover(function(){
+      $("ul#menu").css({
+        "transform": "translateX(-"+offset/3+"px)"
+      });
+      });
+
+      rotatePrev();
+      rotateNext();
+
+      function rotatePrev(){
+      var translate = offset;
+      prevArray = $("ul#menu li.highlighted").prevAll();
+      for(var i = 0; i < prevArray.length; i++){
+        $(prevArray[i]).css({
+          "transform": "rotateY(35deg) translateX("+translate+"px)",
+          "z-index": prevArray.length - i
+        });
+        $("ul#menu").css({
+          "transform": "translateX(-"+translate+"px)"
+        });
+        translate += 20;
+      }
+      $("ul#menu li.highlighted").prev().css({
+        "transform": "rotateY(35deg) translateX("+(offset/2)+"px)"
+      });
+
+      }
+
+      function rotateNext(){
+      var translate = offset;
+      nextArray = $("ul#menu li.highlighted").nextAll();
+      for(var i = 0; i < nextArray.length; i++){
+        $(nextArray[i]).css({
+          "transform": "rotateY(-35deg) translateX(-"+translate+"px)",
+          "z-index": nextArray.length - i
+        });
+        translate += 20;
+      }
+      $("ul#menu li.highlighted").next().css({
+        "transform": "rotateY(-35deg) translateX(-"+(offset/2)+"px)"
+      });
+      }
+
+</script>
+
+
+    </body>
+</html>
