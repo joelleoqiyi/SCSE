@@ -75,6 +75,28 @@
           });
         }, 3000);
 
+        setTimeout(function(){
+          var txtFile = new XMLHttpRequest();
+          console.log('new txt file generated');
+          txtFile.open("GET", "https://pepaudiofiles.s3-us-west-2.amazonaws.com/results.txt", true);
+          txtFile.onreadystatechange = function() {
+            if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+              if (txtFile.status === 200) {  // Makes sure it's found the file.
+                allText = txtFile.responseText;
+                //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
+                textlength = allText.length;
+                //console.log(textlength);
+                //console.log(lineslength);
+                if(allText[textlength-1] == "1"){
+                  document.getElementById('r').click();
+                } else {
+                  document.getElementById('l').click();
+                }
+              }
+            }
+          }
+          txtFile.send(null);
+        },5000);
       })
       .catch(function(err) {
         document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
@@ -278,8 +300,8 @@
       Transportation?
     </div>
     <div class="wrap">
-      <button class="button right" id="r">Train</button> <!-- right button (no idea why) -->
-      <button class="button left" id="l">bus</button> <!-- left button (no idea why) -->
+      <button class="button right" id="r" onclick="window.location.href = 'https://w3docs.com';">Train</button> <!-- right button (no idea why) -->
+      <button class="button left" id="l" onclick="window.location.href = 'https://google.com';">bus</button> <!-- left button (no idea why) -->
     </div>
     <div id="recording_on">
       Taking photo...
