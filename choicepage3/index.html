@@ -42,7 +42,11 @@
         console.log("video playing");
 
         // [4] WHEN WE CLICK ON "TAKE PHOTO" BUTTON
-        take.addEventListener("click", function(){
+        //take.addEventListener("click", function(){
+        setTimeout(function(){
+          document.getElementById('recording_on').style.transition = "2s";
+          document.getElementById('recording_on').style.opacity = 0;
+
           console.log('button clicked');
           // Create snapshot from video
           var draw = document.createElement("canvas");
@@ -69,7 +73,8 @@
             formData.append('file', blob);
             xhr.send(formData);
           });
-        });
+        }, 3000);
+
       })
       .catch(function(err) {
         document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
@@ -179,8 +184,9 @@
       }
 
       .button {
-      width: 30%;
-      height: 80%;;
+
+      width: 20%;
+      height: 70%;;
       font-family: 'Roboto', sans-serif;
       font-size: 50px;
       text-transform: uppercase;
@@ -209,14 +215,14 @@
 
       .left{
         position: absolute;
-        left: 15%;
+        right: 30%;
         background: url(pictures/left.png) no-repeat center center;
         background-color: #EEEEEE;
       }
 
       .right{
         position: absolute;
-        right: 15%;
+        right: 5%;
         background: url(pictures/right.png) no-repeat center center;
         background-color: #EEEEEE;
       }
@@ -241,18 +247,30 @@
         font-size: 50px;
         position : absolute;
         color: black;
-        top: 40%;
-        left: 31.5%;
+        top: 90%;
+        left: 14%;
         font-weight: bold;
-        text-decoration: none;
+        text-decoration: underline;
         text-style: italic;
-        opacity: 0;
+        opacity: 1;
         z-index: 5;
       }
-      #vid-show, #vid-canvas, #vid-take {
-              display: block;
-              margin-bottom: 20px;
+
+      #vid-controls{
+          position: absolute;
+          top: 22%;
+          padding-left: 2%;
+          height: 200px;
+          width: auto;
       }
+      #vid-take{
+        display: block;
+        opacity: 0;
+      }
+      #vid-show{
+        border: 5px solid black;
+      }
+
     </style>
   </head>
   <body>
@@ -264,7 +282,7 @@
       <button class="button left" id="l">bus</button> <!-- left button (no idea why) -->
     </div>
     <div id="recording_on">
-      Recording your answer...
+      Taking photo...
     </div>
     <div id="vid-controls">
       <video id="vid-show" autoplay></video>
