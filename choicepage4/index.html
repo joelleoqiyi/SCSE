@@ -10,17 +10,17 @@
     var xhr = new XMLHttpRequest();
     var file = undefined;
     function downloadfiles(blob) {
-      xhr.open('POST', 'http://pepaudiofiles.s3.amazonaws.com/', true);
+      xhr.open('POST', 'http://exascoring.s3.amazonaws.com/', true);
       var formData = new FormData();
-      formData.append('key', "audio.mp3");
+      formData.append('key', "audio.webm");
       formData.append('success_action_redirect', "https://www.google.com");
-      formData.append('Content-Type', "audio/mp3");
+      formData.append('Content-Type', "audio/webm");
       formData.append('x-amz-acl', "public-write");
       formData.append('X-Amz-Credential', "AKIATNB5XQL4YIXZOLH7/20200115/us-west-2/s3/aws4_request"); //needs to be changed
       formData.append('X-Amz-Algorithm', "AWS4-HMAC-SHA256");
       formData.append('X-Amz-Date', "20200115T141126Z"); //needs to be changed
-      formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTIwVDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJwZXBhdWRpb2ZpbGVzIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImF1ZGlvLm1wMyJdLA0KICAgIHsic3VjY2Vzc19hY3Rpb25fcmVkaXJlY3QiOiAiaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbSJ9LA0KICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICJhdWRpby9tcDMiXSwNCg0KICAgIHsieC1hbXotY3JlZGVudGlhbCI6ICJBS0lBVE5CNVhRTDRZSVhaT0xINy8yMDIwMDExNS91cy13ZXN0LTIvczMvYXdzNF9yZXF1ZXN0In0sDQogICAgeyJ4LWFtei1hY2wiOiAicHVibGljLXdyaXRlIn0sDQogICAgeyJ4LWFtei1hbGdvcml0aG0iOiAiQVdTNC1ITUFDLVNIQTI1NiJ9LA0KICAgIHsieC1hbXotZGF0ZSI6ICIyMDIwMDExNVQxNDExMjZaIiB9DQogIF0NCn0="); //needs to be changed
-      formData.append('X-Amz-Signature', "c42cac98e9ccd010346542d3f6a378207e349436f64f57f4c36cf4a99e5502e6");//needs to be changed
+      formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTIwVDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJleGFzY29yaW5nIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImF1ZGlvLndlYm0iXSwNCiAgICB7InN1Y2Nlc3NfYWN0aW9uX3JlZGlyZWN0IjogImh0dHBzOi8vd3d3Lmdvb2dsZS5jb20ifSwNCiAgICBbInN0YXJ0cy13aXRoIiwgIiRDb250ZW50LVR5cGUiLCAiYXVkaW8vd2VibSJdLA0KDQogICAgeyJ4LWFtei1jcmVkZW50aWFsIjogIkFLSUFUTkI1WFFMNFlJWFpPTEg3LzIwMjAwMTE1L3VzLXdlc3QtMi9zMy9hd3M0X3JlcXVlc3QifSwNCiAgICB7IngtYW16LWFjbCI6ICJwdWJsaWMtd3JpdGUifSwNCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sDQogICAgeyJ4LWFtei1kYXRlIjogIjIwMjAwMTE1VDE0MTEyNloiIH0NCiAgXQ0KfQ=="); //needs to be changed
+      formData.append('X-Amz-Signature', "95a68f92c199ea77309a994104a5762636ec4a37841501faa6aa77c383f949f7");//needs to be changed
       formData.append('file', blob);
       xhr.send(formData);
     }
@@ -35,7 +35,7 @@
         recorder.ondataavailable = e => {
           chunks.push(e.data);
           if (recorder.state == 'inactive') {
-            const blob = new Blob(chunks, { type: 'audio/mp3' });
+            const blob = new Blob(chunks, { type: 'audio/webm' });
             console.log("Blob initialised");
             downloadfiles(blob);
           }
