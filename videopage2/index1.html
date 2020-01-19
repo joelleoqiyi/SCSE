@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <!--<link rel="stylesheet" type="text/css" href="css.css">-->
+  <script type="text/javascript" src="jquery-min.js"></script>
+  <script type="text/javascript" src="jquery.transit.min.js"></script>
+  <script type="text/javascript" src="js.js"></script>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Arimo);
+    @import url(https://fonts.googleapis.com/css?family=Didact+Gothic);
+
+    html {
+      font-family: Futura, Helvetica;
+      color: white;
+      background-color: #222;
+    }
+    html,
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    h1 {
+      font-family: "Didact Gothic", sans-serif;
+      margin-bottom: -10px;
+    }
+    p {
+      font-family: "Arimo", sans-serif;
+      font-size: 11pt;
+      line-height: 14pt;
+    } /*not needed*/
+
+    .container {
+      width: 200px;
+      height: 100px;
+      position: absolute;
+      top: 89.25%;
+      left: 50%;
+      overflow: hidden;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      border-bottom: 5px solid black;
+    }
+
+    .gauge-a {
+      z-index: 1;
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.2);
+      width: 200px;
+      height: 100px;
+      top: 0%;
+      border-radius: 125px 125px 0px 0px;
+    }
+    .gauge-b {
+      z-index: 3;
+      position: absolute;
+      background-color: #222;
+      width: 125px;
+      height: 62.5px;
+      top: 40px;
+      margin-left: 37.5px;
+      margin-right: auto;
+      border-radius: 125px 125px 0px 0px;
+    }
+    .gauge-c {
+      z-index: 2;
+      position: absolute;
+      background: linear-gradient(#5736cb, #aa2dc1 50%, #d9003a);
+      width: 200px;
+      height: 100px;
+      top: 100px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 0px 0px 100px 100px;
+      transform-origin: center top;
+      transition: all 1.3s ease-in-out;
+    }
+
+
+
+
+    .gauge-data {
+      z-index: 4;
+      color: rgba(255, 255, 255, 1);
+      font-size: 1.5em;
+      line-height: 25px;
+      position: absolute;
+      width: 200px;
+      height: 100px;
+      top: 33px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: all 1s ease-out;
+    }
+    video{
+      z-index:0;
+      width: 90%;
+      height: 90%;
+      position: absolute;
+      right: 5%;
+      top: 5%;
+      background-color: black;
+      border: 5px solid black
+    }
+    #button{
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        right: 5%;
+        top: 70%;
+        z-index: 10;
+        background-color: red;
+        opacity: 0;
+        background: url(https://icons-for-free.com/iconfiles/png/128/forward+front+music+next+icon-1320185671797812353.png) no-repeat center center;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <video autoplay controls>
+    <source src="https://pepaudiofiles.s3-us-west-2.amazonaws.com/videos/%23PEP_scene1-1.5.mp4" type="video/">
+  </video>
+  <div class="container">
+    <div class="gauge-a"></div> <!-- blank background -->
+    <div class="gauge-b"></div> <!-- the hole in the center -->
+    <div class="gauge-c"></div> <!-- the turning thing -->
+    <div class="gauge-data">
+      <h1 id="percent">0%</h1></div>
+    </div>
+    <button type="button" name="button" id="button" onclick="location.href="""></button>
+</body>
+  <script>
+    var angle = 0; <!-- input from previous page from 0 to 0.5 -->
+    var turningangle ="";
+    var percentage =0;
+    var roundednumber =0;
+    $( document ).ready(function() {
+      var txtFile = new XMLHttpRequest();
+      var number =0;
+      console.log('new txt file generated');
+      txtFile.open("GET", "https://pepaudiofiles.s3-us-west-2.amazonaws.com/results.txt", true);
+      console.log('txt file opened');
+      txtFile.onreadystatechange = function() {
+          console.log('on ready state change');
+          if (txtFile.readyState === 4) {
+            console.log("document ready to parse");// Makes sure the document is ready to parse.
+            if (txtFile.status === 200) {  // Makes sure it's found the file.
+              allText = txtFile.responseText;
+              console.log(allText);
+                //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
+              textlength = allText.length;
+              for(var i=0; i<textlength;i++){
+                if(allText[i] == "1"){
+                  number = number+1;
+                }
+              }
+              number2 = (number/textlength)*100;
+              roundednumber = Math.round(number2);
+              console.log(roundednumber);
+              angle = (roundednumber/100)*0.5;
+              turningangle = "rotate("+angle+"turn)";
+              //document.getElementById("videos").play();
+              document.getElementsByClassName("gauge-c")[0].style.transform = turningangle;
+              document.getElementById("percent").innerHTML = roundednumber + "%";
+              button = document.getElementById('button');
+              setTimeout(function(){button.style.opacity = "1";},5000);
+            }
+          } else{
+            console.log('document is not ready to parse');
+          }
+        }
+      txtFile.send(null);
+      //document.getElementById("videos").play();
+      //document.getElementsByClassName("gauge-c")[0].style.transform = turningangle;
+      //document.getElementById("videos").play(); <!-- plays video -->
+      //document.getElementById("percent").innerHTML = roundednumber +"%";
+      //document.getElementByClassName("gauge-c")[0].style.transform = "rotate(0.2)";
+    });
+  </script>
+</html>
