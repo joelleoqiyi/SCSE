@@ -10,7 +10,7 @@
     var xhr = new XMLHttpRequest();
     var file = undefined;
     function downloadfiles(blob) {
-      xhr.open('POST', 'http://exascoring.s3.amazonaws.com/', true);
+      xhr.open('POST', 'http://pepaudiofiles.s3.amazonaws.com/', true);
       var formData = new FormData();
       formData.append('key', "audio.webm");
       formData.append('success_action_redirect', "https://www.google.com");
@@ -19,8 +19,8 @@
       formData.append('X-Amz-Credential', "AKIATNB5XQL4YIXZOLH7/20200115/us-west-2/s3/aws4_request"); //needs to be changed
       formData.append('X-Amz-Algorithm', "AWS4-HMAC-SHA256");
       formData.append('X-Amz-Date', "20200115T141126Z"); //needs to be changed
-      formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTIwVDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJleGFzY29yaW5nIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImF1ZGlvLndlYm0iXSwNCiAgICB7InN1Y2Nlc3NfYWN0aW9uX3JlZGlyZWN0IjogImh0dHBzOi8vd3d3Lmdvb2dsZS5jb20ifSwNCiAgICBbInN0YXJ0cy13aXRoIiwgIiRDb250ZW50LVR5cGUiLCAiYXVkaW8vd2VibSJdLA0KDQogICAgeyJ4LWFtei1jcmVkZW50aWFsIjogIkFLSUFUTkI1WFFMNFlJWFpPTEg3LzIwMjAwMTE1L3VzLXdlc3QtMi9zMy9hd3M0X3JlcXVlc3QifSwNCiAgICB7IngtYW16LWFjbCI6ICJwdWJsaWMtd3JpdGUifSwNCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sDQogICAgeyJ4LWFtei1kYXRlIjogIjIwMjAwMTE1VDE0MTEyNloiIH0NCiAgXQ0KfQ=="); //needs to be changed
-      formData.append('X-Amz-Signature', "95a68f92c199ea77309a994104a5762636ec4a37841501faa6aa77c383f949f7");//needs to be changed
+      formData.append('Policy', "eyAiZXhwaXJhdGlvbiI6ICIyMDIwLTAxLTIwVDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6IFsNCiAgICB7ImJ1Y2tldCI6ICJwZXBhdWRpb2ZpbGVzIn0sDQogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgImF1ZGlvLndlYm0iXSwNCiAgICB7InN1Y2Nlc3NfYWN0aW9uX3JlZGlyZWN0IjogImh0dHBzOi8vd3d3Lmdvb2dsZS5jb20ifSwNCiAgICBbInN0YXJ0cy13aXRoIiwgIiRDb250ZW50LVR5cGUiLCAiYXVkaW8vd2VibSJdLA0KDQogICAgeyJ4LWFtei1jcmVkZW50aWFsIjogIkFLSUFUTkI1WFFMNFlJWFpPTEg3LzIwMjAwMTE1L3VzLXdlc3QtMi9zMy9hd3M0X3JlcXVlc3QifSwNCiAgICB7IngtYW16LWFjbCI6ICJwdWJsaWMtd3JpdGUifSwNCiAgICB7IngtYW16LWFsZ29yaXRobSI6ICJBV1M0LUhNQUMtU0hBMjU2In0sDQogICAgeyJ4LWFtei1kYXRlIjogIjIwMjAwMTE1VDE0MTEyNloiIH0NCiAgXQ0KfQ=="); //needs to be changed
+      formData.append('X-Amz-Signature', "b635e49694cbc9f196dc189daad000340414ee65b292f3668f9d344b4951c630");//needs to be changed
       formData.append('file', blob);
       xhr.send(formData);
     }
@@ -48,7 +48,7 @@
           document.getElementById('recording_on').style.transition = "2s";
           document.getElementById('recording_on').style.opacity = 0;
           // alert("recording stopped"); //recording works.. kinda
-        }, 15000);
+        }, 4000);
 
         analyser.smoothingTimeConstant = 0.8;
         analyser.fftSize = 1024;
